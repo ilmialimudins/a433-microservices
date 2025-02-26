@@ -14,8 +14,12 @@ build_push_image.sh
 
 login docker hub (hub.docker.com)
 
+docker-compose down (untuk delte)
+
 docker build -t ilmialimudins35/item-app:v1 .
+
 docker-compose up -d
+
 docker-compose logs > log.txt
 
 -->
