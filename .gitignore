@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log
+package-lock.json
+
+# Build output
+dist/
+public/javascripts/dist/
+coverage/
+build/
+tmp/
+out/
+
+# Logs
+logs
+*.log
+debug.log
+error.log
+.log
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
+
+# OS-generated files
+*.swp
+*.swo
+*.bak
+
+# Docker-related files
+docker-compose.override.yml
+.env

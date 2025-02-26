@@ -1,0 +1,21 @@
+version: '2.2'  # Menggunakan Docker Compose versi 2.2
+
+services:
+  item-db:
+    image: mongo:3  # Menggunakan image MongoDB versi 3
+    container_name: item-db  # Menentukan nama container sebagai 'item-db'
+    restart: always  # Selalu restart container jika terhenti
+    volumes:
+      - app-db:/data/db  # Menyimpan data database di volume bernama 'app-db'
+
+  item-app:
+    image: ilmialimudins35/item-app:v1  # Menggunakan image aplikasi dari Docker Hub
+    container_name: item-app  # Menentukan nama container sebagai 'item-app'
+    restart: always  # Selalu restart container jika terhenti
+    ports:
+      - "8081:8081"  # Memetakan port 8081 di host ke port 8081 di container
+    depends_on:
+      - item-db  # Memastikan 'item-app' hanya berjalan setelah 'item-db' aktif
+
+volumes:
+  app-db:  # Mendefinisikan volume untuk menyimpan data database

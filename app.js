@@ -45,12 +45,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
+// var insertDocument = function (db, document, callback) {
+//   var collection = db.collection('documents');
+//   collection.insertOne(document, function (err, result) {
+//     callback(err, JSON.stringify(result.ops[0]));
+//   });
+// };
 var insertDocument = function (db, document, callback) {
   var collection = db.collection('documents');
   collection.insertOne(document, function (err, result) {
-    callback(err, JSON.stringify(result.ops[0]));
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, JSON.stringify({ insertedId: result.insertedId }));
+    }
   });
 };
+
 
 var findAllDocuments = function (db, callback) {
   var collection = db.collection('documents');
