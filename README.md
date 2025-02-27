@@ -24,3 +24,11 @@ Karsajobs read configuration from environment variable
   - `DELETE` delete job
 - /health
   - `GET` check app health status
+
+
+<!-- langkah Kubernetes 
+
+1. buat build_push_image_karsajobs.sh
+2. jalankan ./build_push_image_karsajobs.sh
+3
+-->

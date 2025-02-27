@@ -4,7 +4,7 @@
 set -e
 
 # Nama image
-DOCKER_USERNAME="ilmialimudins35" # Ganti dengan username Docker Hub 
+DOCKER_USERNAME="ilmi35" # Ganti dengan username Docker Hub 
 IMAGE_NAME="$DOCKER_USERNAME/karjajobs:latest"
 
 echo "🌀 Membuild Docker image: $IMAGE_NAME"
