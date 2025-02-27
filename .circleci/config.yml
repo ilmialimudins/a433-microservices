@@ -4,11 +4,13 @@ jobs:
   lint-dockerfile:
     docker:
       - image: hadolint/hadolint:latest
+        entrypoint: ["/bin/hadolint"]  # Set entrypoint langsung ke hadolint
     steps:
       - checkout
       - run:
           name: Lint Dockerfile
-          command: ["hadolint", "Dockerfile"]
+          command: Dockerfile
+
 
   test-app:
     docker:
