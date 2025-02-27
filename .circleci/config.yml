@@ -4,12 +4,11 @@ jobs:
   lint-dockerfile:
     docker:
       - image: hadolint/hadolint:latest
-        entrypoint: [""]  # Menonaktifkan entrypoint default
     steps:
       - checkout
       - run:
           name: Lint Dockerfile
-          command: hadolint Dockerfile
+          command: ["hadolint", "Dockerfile"]
 
   test-app:
     docker:
