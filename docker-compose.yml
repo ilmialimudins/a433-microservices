@@ -13,7 +13,7 @@ services:
     container_name: item-app  # Menentukan nama container sebagai 'item-app'
     restart: always  # Selalu restart container jika terhenti
     ports:
-      - "8080:8080"  # Memetakan port 8080 di host ke port 8080 di container
+      - "80:8080"  # Memetakan port 80 di host ke port 8080 di container
     depends_on:
       - item-db  # Memastikan 'item-app' hanya berjalan setelah 'item-db' aktif
 
