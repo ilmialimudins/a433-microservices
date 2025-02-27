@@ -3,13 +3,14 @@ version: 2.1
 jobs:
   lint-dockerfile:
     docker:
-      - image: hadolint/hadolint:latest
-        entrypoint: ["/bin/hadolint"]  # Set entrypoint langsung ke hadolint
+      - image: hadolint/hadolint:latest  # Menggunakan Hadolint resmi
+        entrypoint: ["hadolint"]  # Menjadikan hadolint sebagai entrypoint
     steps:
-      - checkout
+      - checkout  
       - run:
           name: Lint Dockerfile
-          command: Dockerfile
+          command: hadolint Dockerfile  # Menjalankan Hadolint dengan benar
+
 
 
   test-app:
