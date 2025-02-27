@@ -4,6 +4,7 @@ jobs:
   lint-dockerfile:
     docker:
       - image: hadolint/hadolint:latest
+        entrypoint: []
     steps:
       - checkout
       - run:
