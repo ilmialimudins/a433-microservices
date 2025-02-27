@@ -5,7 +5,7 @@ set -e
 
 # Nama image
 DOCKER_USERNAME="ilmi35" # Ganti dengan username Docker Hub 
-IMAGE_NAME="$DOCKER_USERNAME/karjajobs:latest"
+IMAGE_NAME="$DOCKER_USERNAME/karsajobs:latest"
 
 echo "🌀 Membuild Docker image: $IMAGE_NAME"
 docker build -t $IMAGE_NAME .
