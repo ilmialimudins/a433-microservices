@@ -4,7 +4,7 @@
 set -e
 
 # Nama Image
-DOCKER_USERNAME="ilmialimudins35" #Ganti dengan nama Docker Hub
+DOCKER_USERNAME="ilmi35" #Ganti dengan nama Docker Hub
 IMAGE_NAME="$DOCKER_USERNAME/karsajobs-ui:latest"
 
 echo "🌀 Membuild Docker image"
