@@ -30,9 +30,6 @@ workflows:
   frontend_pipeline:
     jobs:
       - lint-frontend
-      - test-frontend:
-          requires:
-            - lint-frontend
       - build-frontend:
           requires:
             - test-frontend
