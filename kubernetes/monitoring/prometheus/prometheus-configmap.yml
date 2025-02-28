@@ -13,6 +13,7 @@ data:
         static_configs:
           - targets: ['karsajobs-service:8080']
 
-      - job_name: 'karsajobs-frontend'
+      - job_name: "karsajobs-frontend"
         static_configs:
-          - targets: ['karsajobs-ui-service:8000']
+      - targets:
+        - karsajobs-ui-service.default.svc.cluster.local:9113  # Port sidecar exporter

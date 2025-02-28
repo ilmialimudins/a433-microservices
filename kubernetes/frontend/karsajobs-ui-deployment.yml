@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karsajobs-ui
+  name: karsajobs-frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: karsajobs-ui
+      app: karsajobs-frontend
   template:
     metadata:
       labels:
-        app: karsajobs-ui
+        app: karsajobs-frontend
     spec:
       containers:
-        - name: karsajobs-ui
-          image: ilmi35/karsajobs-ui:latest
-          ports:
-            - containerPort: 8000
-          env:
-            - name: VUE_APP_BACKEND
-              value: "http://<Node_IP>:<Node_Port>"
+      - name: vue-frontend
+        image: ilmi35/karsajobs-ui:latest
+        ports:
+        - containerPort: 8000
+
+      - name: prometheus-exporter
+        image: nginx/nginx-prometheus-exporter
+        args:
+        - "-nginx.scrape-uri=http://127.0.0.1:8000/nginx_status"
+        ports:
+        - containerPort: 9113

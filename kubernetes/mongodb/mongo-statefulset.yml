@@ -21,23 +21,23 @@ spec:
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
-            - name: mongo-config
-              mountPath: /config
+            - name: mongo-credentials
+              mountPath: /etc/mongo-credentials
+              readOnly: true
           env:
-            - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: MONGO_ROOT_USERNAME
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: MONGO_ROOT_PASSWORD
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
       volumes:
-        - name: mongo-config
-          configMap:
-            name: mongo-config
         - name: mongo-storage
           persistentVolumeClaim:
             claimName: mongo-pvc
+        - name: mongo-credentials
+          secret:
+            secretName: mongo-secret
+            items:
+              - key: MONGO_ROOT_USERNAME
+                path: MONGO_ROOT_USERNAME
+              - key: MONGO_ROOT_PASSWORD
+                path: MONGO_ROOT_PASSWORD
