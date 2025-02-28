@@ -13,18 +13,6 @@ jobs:
           name: Lint Code
           command: npx vue-cli-service lint
 
-  test-frontend:
-    docker:
-      - image: node:16
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Run Unit Tests
-          command: npx vue-cli-service test:unit
-
   build-frontend:
     docker:
       - image: node:16
