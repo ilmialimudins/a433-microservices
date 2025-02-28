@@ -1,5 +1,5 @@
 version: 2.1
-jjobs:
+jobs:
   lint-dockerfile:
     machine:
       image: ubuntu-2204:current  # Gunakan mesin virtual penuh
