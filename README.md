@@ -88,7 +88,9 @@ minikube service karsajobs-ui-service
 10 . jalankan service minicube
     minikube service prometheus-service -n monitoring
     minikube service grafana-service -n monitoring
-
+11. jalankan images 
+     docker run -d --name karsajobs-ui -p 8000:8000 ilmi35/karsajobs-ui:latest (frontend)
+      docker run -d --name karsajobs-ui -p 8080:8080 ilmi35/karsajobs:latest (backend)
 
 
 -->
