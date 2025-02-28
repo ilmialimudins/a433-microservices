@@ -1,15 +1,18 @@
 version: 2.1
 jobs:
   lint-dockerfile:
-    docker:
-      - image: docker:latest
+    machine:
+      image: ubuntu-2204:current  # Gunakan mesin virtual penuh
     steps:
       - checkout
-      - setup_remote_docker
+      - run:
+          name: Install Docker
+          command: |
+            sudo apt update
+            sudo apt install -y docker.io
       - run:
           name: Lint Dockerfile
           command: docker run --rm -i hadolint/hadolint hadolint Dockerfile
-
 
 
 
