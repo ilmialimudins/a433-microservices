@@ -1,37 +1,38 @@
 version: 2.1
 
 jobs:
-  lint-dockerfile:
+  lint-frontend:
     docker:
-      - image: hadolint/hadolint:latest
+      - image: node:16
     steps:
       - checkout
       - run:
-          name: Lint Dockerfile
-          command: hadolint Dockerfile
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Lint Code
+          command: npm run lint
 
-  build-app-karsajobs-ui:
+  test-frontend:
     docker:
-      - image: docker:latest
+      - image: node:16
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14  # ✅ Specify a version to avoid issues
       - run:
-          name: Login to Docker Hub
-          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          name: Install Dependencies
+          command: npm install
       - run:
-          name: Build Docker Image
-          command: docker build -t $DOCKERHUB_USERNAME/karsajobs-ui:latest .
-      - run:
-          name: Push Docker Image
-          command: docker push $DOCKERHUB_USERNAME/karsajobs-ui:latest
+          name: Run Unit Tests
+          command: npm run test:unit
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - lint-dockerfile
-      - build-app-karsajobs-ui:
-          requires:
-            - lint-dockerfile
+  build-frontend:
+    docker:
+      - image: node:16
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build Project
+          command: npm run build
