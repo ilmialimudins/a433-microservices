@@ -11,7 +11,7 @@ jobs:
           command: npm install
       - run:
           name: Lint Code
-          command: npm run lint
+          command: vue-cli-service lint
 
   test-frontend:
     docker:
@@ -23,7 +23,7 @@ jobs:
           command: npm install
       - run:
           name: Run Unit Tests
-          command: npm run test:unit
+          command: vue-cli-service test:unit
 
   build-frontend:
     docker:
@@ -35,4 +35,16 @@ jobs:
           command: npm install
       - run:
           name: Build Project
-          command: npm run build
+          command: vue-cli-service build
+
+workflows:
+  version: 2
+  frontend_pipeline:
+    jobs:
+      - lint-frontend
+      - test-frontend:
+          requires:
+            - lint-frontend
+      - build-frontend:
+          requires:
+            - test-frontend
