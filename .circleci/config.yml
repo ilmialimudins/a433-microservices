@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   lint-dockerfile:
     machine:
-      image: ubuntu-2204:current  # Gunakan mesin virtual penuh
+      image: ubuntu-2204:current  # Use a full VM to run Docker
     steps:
       - checkout
       - run:
@@ -16,9 +16,17 @@ jobs:
             echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
             sudo apt update
             sudo apt install -y docker-ce docker-ce-cli containerd.io
+            sudo systemctl start docker  # ✅ Start Docker
+            sudo systemctl enable docker
+            sudo usermod -aG docker $USER  # ✅ Add user to Docker group
+      - run:
+          name: Verify Docker Installation
+          command: docker --version  # ✅ Check if Docker is installed correctly
       - run:
           name: Lint Dockerfile
-          command: docker run --rm -i hadolint/hadolint hadolint Dockerfile
+          command: |
+            sudo docker run --rm -i hadolint/hadolint hadolint < Dockerfile  # ✅ Fixed input redirection
+
 
 
 
