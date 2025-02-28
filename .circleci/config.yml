@@ -32,4 +32,4 @@ workflows:
       - lint-frontend
       - build-frontend:
           requires:
-            - test-frontend
+            - lint-frontend
