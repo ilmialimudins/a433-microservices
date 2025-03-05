@@ -4,16 +4,18 @@ metadata:
   name: prometheus-config
   namespace: monitoring
 data:
-  prometheus.yml: |
+  prometheus.yml: | 
     global:
       scrape_interval: 15s
 
     scrape_configs:
-      - job_name: 'karsajobs-backend'
+      - job_name: "karsajobs-backend"
         static_configs:
-          - targets: ['karsajobs-service:8080']
+          - targets:
+             - ['karsajobs-service.default.svc.cluster.local:8080']
+            labels:
+               instance: "karsajobs-service:8080"
 
       - job_name: "karsajobs-frontend"
         static_configs:
-      - targets:
-        - karsajobs-ui-service.default.svc.cluster.local:9113  # Port sidecar exporter
+          - targets: ['karsajobs-ui-service.default.svc.cluster.local:9113']  # Port sidecar exporter

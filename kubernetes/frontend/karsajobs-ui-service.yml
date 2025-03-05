@@ -4,7 +4,7 @@ metadata:
   name: karsajobs-ui-service
 spec:
   selector:
-    app: karsajobs-ui
+    app: karsajobs-frontend
   ports:
     - protocol: TCP
       port: 8000

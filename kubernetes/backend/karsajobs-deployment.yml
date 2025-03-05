@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karsajobs
+  name: karsajobs-backend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: karsajobs
+      app: karsajobs-backend
   template:
     metadata:
       labels:
-        app: karsajobs
+        app: karsajobs-backend
     spec:
       containers:
-        - name: karsajobs
+        - name: go-arsajobs
           image: ilmi35/karsajobs:latest
           ports:
             - containerPort: 8080
