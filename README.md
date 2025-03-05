@@ -68,10 +68,12 @@ kubectl apply -f frontend/
 
 untuk cek
 kubectl get pods
+tunggu status Running pods
+
 kubectl get svc
 
 jalankan service 
-minikube service karsajobs-ui-service
+minikube service karsajobs-ui-service (pastikan pods running)
 6. buat namespaces ( kubectl create namespace monitoring )
 7. mkdir monitoring dan cd monitoring 
   prometheus = 
@@ -86,11 +88,14 @@ minikube service karsajobs-ui-service
   8. jalan kan kubectl apply -f grafana/  && jalan kan kubectl apply -f prmoetheus/ 
   9.cek pod bejalana ( kubectl get pods -n monitoring)
 10 . jalankan service minicube
+    kubectl get all -n monitoring
+
     minikube service prometheus-service -n monitoring
     minikube service grafana-service -n monitoring
 11. jalankan images 
      docker run -d --name karsajobs-ui -p 8000:8000 ilmi35/karsajobs-ui:latest (frontend)
       docker run -d --name karsajobs-ui -p 8080:8080 ilmi35/karsajobs:latest (backend)
+
 
 
 -->
