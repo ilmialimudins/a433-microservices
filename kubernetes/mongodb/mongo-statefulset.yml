@@ -24,6 +24,9 @@ spec:
             - name: mongo-credentials
               mountPath: /etc/mongo-credentials
               readOnly: true
+            - name: mongo-config
+              mountPath: /config
+              readOnly: true
           env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
@@ -41,3 +44,6 @@ spec:
                 path: MONGO_ROOT_USERNAME
               - key: MONGO_ROOT_PASSWORD
                 path: MONGO_ROOT_PASSWORD
+        - name: mongo-config
+          configMap:
+            name: mongo-config

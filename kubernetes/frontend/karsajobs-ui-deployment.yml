@@ -17,10 +17,3 @@ spec:
         image: ilmi35/karsajobs-ui:latest
         ports:
         - containerPort: 8000
-
-      - name: prometheus-exporter
-        image: nginx/nginx-prometheus-exporter
-        args:
-        - "-nginx.scrape-uri=http://127.0.0.1:8000/nginx_status"
-        ports:
-        - containerPort: 9113

@@ -6,3 +6,5 @@ data:
   mongo.conf: |
     storage:
       dbPath: /data/db
+      journal:
+        enabled: true
