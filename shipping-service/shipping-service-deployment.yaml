@@ -1,0 +1,24 @@
+apiVersion: apps/v1  # Menentukan versi API Kubernetes yang digunakan untuk membuat Deployment.
+kind: Deployment  # Menyatakan bahwa objek yang dibuat adalah Deployment.
+metadata:
+  name: shipping-service  # Nama unik untuk Deployment ini agar dapat dikenali dalam cluster.
+spec:
+  replicas: 1  # Menentukan jumlah replika (pod) yang akan dijalankan.
+  selector:
+    matchLabels:
+      app: shipping-service  # Deployment akan mengelola pod yang memiliki label "app: shipping-service".
+  template:  # Template untuk membuat pod baru berdasarkan spesifikasi yang diberikan.
+    metadata:
+      labels:
+        app: shipping-service  # Memberikan label pada pod yang dibuat agar cocok dengan selector.
+    spec:
+      containers:  # Daftar container yang akan dijalankan dalam pod.
+        - name: shipping-service  # Nama container dalam pod.
+          image: ghcr.io/ilmialimudins/shipping-service:latest  # Gambar container yang digunakan (diambil dari GitHub Container Registry).
+          ports:
+            - containerPort: 3001  # Menentukan port dalam container yang akan diekspos.
+          env:  # Menentukan variabel lingkungan (environment variables) untuk container.
+            - name: PORT
+              value: "3001"  # Menentukan bahwa aplikasi akan berjalan di port 3001 dalam container.
+            - name: AMQP_URL
+              value: "amqp://rabbitmq-service:5672"  # URL untuk menghubungkan ke RabbitMQ sesuai dengan nama service dan port yang digunakan.

@@ -1,0 +1,17 @@
+apiVersion: v1  # Menentukan versi API Kubernetes yang digunakan untuk membuat Service.
+kind: Service  # Menyatakan bahwa objek yang dibuat adalah Service.
+metadata:
+  name: rabbitmq-service  # Nama unik untuk Service ini agar dapat dikenali dalam cluster.
+spec:
+  selector:
+    app: rabbitmq  # Service ini akan mengarahkan lalu lintas ke pod yang memiliki label "app: rabbitmq".
+  ports:  # Daftar port yang akan diekspos oleh Service ini.
+    - protocol: TCP  # Menggunakan protokol TCP untuk komunikasi jaringan.
+      port: 5672  # Port yang diekspos oleh Service di dalam cluster untuk komunikasi AMQP.
+      targetPort: 5672  # Port dalam container RabbitMQ yang menerima lalu lintas dari Service.
+      name: ampq  # Nama port untuk referensi internal.
+    - protocol: TCP  # Menggunakan protokol TCP untuk UI manajemen.
+      port: 15672  # Port yang diekspos oleh Service di dalam cluster untuk UI manajemen RabbitMQ.
+      targetPort: 15672  # Port dalam container RabbitMQ yang menerima lalu lintas dari Service.
+      name: management  # Nama port untuk referensi internal.
+  type: ClusterIP  # Jenis Service yang digunakan, dalam hal ini "ClusterIP", yang hanya dapat diakses dari dalam cluster.

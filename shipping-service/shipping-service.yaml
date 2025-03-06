@@ -1,0 +1,12 @@
+apiVersion: v1  # Menentukan versi API Kubernetes yang digunakan untuk membuat Service.
+kind: Service  # Menyatakan bahwa objek yang dibuat adalah Service.
+metadata:
+  name: shipping-service  # Nama unik untuk Service ini agar dapat dikenali dalam cluster.
+spec:
+  selector:
+    app: shipping-service  # Service ini akan mengarahkan lalu lintas ke pod yang memiliki label "app: shipping-service".
+  ports:  # Daftar port yang akan diekspos oleh Service ini.
+    - protocol: TCP  # Menggunakan protokol TCP untuk komunikasi jaringan.
+      port: 3001  # Port yang diekspos oleh Service di dalam cluster.
+      targetPort: 3001  # Port dalam pod yang menerima lalu lintas dari Service.
+  type: ClusterIP  # Jenis Service yang digunakan, dalam hal ini "ClusterIP", yang hanya dapat diakses dari dalam cluster.

@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1  # Menentukan versi API yang digunakan untuk konfigurasi Istio VirtualService.
+kind: VirtualService  # Menyatakan bahwa objek yang dibuat adalah VirtualService dalam Istio.
+metadata:
+  name: shipping-service  # Memberikan nama unik untuk VirtualService ini agar dapat dikenali dalam cluster.
+spec:
+  hosts:
+    - "*"  # VirtualService ini akan menangani permintaan dari semua host (wildcard).
+  gateways:
+    - ecommerce-gateway  # Mengaitkan VirtualService ini dengan Istio Gateway yang telah didefinisikan sebelumnya.
+  http:
+    - match:
+        - uri:
+            exact: /shipping  # Menentukan bahwa hanya permintaan dengan path "/shipping" yang akan diarahkan.
+      route:
+        - destination:
+            host: shipping-service  # Mengarahkan permintaan ke Service dengan nama "shipping-service".
+            port:
+              number: 3001  # Permintaan akan diteruskan ke port 3001 dari "shipping-service".

@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1  # Menentukan versi API yang digunakan untuk konfigurasi Istio Gateway.
+kind: Gateway  # Menyatakan bahwa objek yang dibuat adalah Gateway dalam Istio.
+metadata:
+  name: ecommerce-gateway  # Memberikan nama unik untuk Gateway ini agar dapat dikenali dalam cluster.
+spec:  
+  selector:
+    istio: ingressgateway  # Memilih pod yang memiliki label "istio: ingressgateway" sebagai tempat menjalankan gateway ini.
+  servers:  # Daftar server yang akan dikonfigurasi untuk menerima lalu lintas jaringan.
+    - port:  # Konfigurasi untuk port yang akan digunakan oleh gateway.
+        number: 80  # Menentukan nomor port yang digunakan (80 adalah port standar untuk HTTP).
+        name: http  # Memberikan nama port sebagai "http" untuk referensi dalam konfigurasi lain.
+        protocol: HTTP  # Menentukan protokol yang digunakan, dalam hal ini adalah HTTP.
+      hosts:
+        - "*"  # Mengizinkan akses dari semua host/domain (wildcard), artinya menerima semua permintaan HTTP dari mana saja.

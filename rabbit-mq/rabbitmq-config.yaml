@@ -1,0 +1,7 @@
+apiVersion: v1  # Menentukan versi API Kubernetes yang digunakan untuk membuat ConfigMap.
+kind: ConfigMap  # Menyatakan bahwa objek yang dibuat adalah ConfigMap, yang digunakan untuk menyimpan konfigurasi.
+metadata:
+  name: rabbitmq-config  # Nama unik untuk ConfigMap ini agar dapat dikenali dalam cluster.
+data:  # Bagian ini berisi pasangan key-value yang menyimpan konfigurasi dalam bentuk teks.
+  RABBITMQ_DEFAULT_USER: "guest"  # Menetapkan username default untuk RabbitMQ.
+  RABBITMQ_DEFAULT_PASS: "guest"  # Menetapkan password default untuk RabbitMQ.

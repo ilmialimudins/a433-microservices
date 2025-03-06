@@ -1,0 +1,23 @@
+apiVersion: apps/v1  # Menentukan versi API Kubernetes yang digunakan untuk membuat Deployment.
+kind: Deployment  # Menyatakan bahwa objek yang dibuat adalah Deployment.
+metadata:
+  name: rabbitmq  # Nama unik untuk Deployment ini agar dapat dikenali dalam cluster.
+spec:
+  replicas: 1  # Menentukan jumlah replika (pod) yang akan dijalankan.
+  selector:
+    matchLabels:
+      app: rabbitmq  # Deployment akan mengelola pod yang memiliki label "app: rabbitmq".
+  template:  # Template untuk membuat pod berdasarkan spesifikasi yang diberikan.
+    metadata:
+      labels:
+        app: rabbitmq  # Memberikan label pada pod yang dibuat agar cocok dengan selector.
+    spec:
+      containers:  # Daftar container yang akan dijalankan dalam pod.
+        - name: rabbitmq  # Nama container dalam pod.
+          image: rabbitmq:3.11-management  # Menggunakan image RabbitMQ versi 3.11 dengan UI manajemen.
+          ports:
+            - containerPort: 5672  # Port utama untuk komunikasi AMQP (digunakan oleh aplikasi yang terhubung ke RabbitMQ).
+            - containerPort: 15672  # Port untuk UI manajemen RabbitMQ (digunakan di browser).
+          envFrom:
+            - configMapRef:
+                name: rabbitmq-config  # Menggunakan ConfigMap "rabbitmq-config" untuk mengatur environment variables.
